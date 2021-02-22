@@ -115,7 +115,7 @@ public class Task {
     // TASK 2. CHECKING THE NEXT TASK EXECUTION
 
     int nextTimeAfter (int current){
-        int nextimeaf = this.end - current;
+        int nextimeaf = this.time - current;
 
         if(nextimeaf <= 0 && interval == 0) {
             return -1;
