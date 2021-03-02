@@ -7,6 +7,9 @@ public class ArrayTaskList {
     Task []arrayTask = new Task[100]; // crear el arreglo
 
     void add (Task task) {
+        if(task == null)
+            throw new NullPointerException();
+
         arrayTask[countOfTasks] = task;
         countOfTasks++;
         if (countOfTasks == arrayTask.length) {
@@ -31,7 +34,8 @@ public class ArrayTaskList {
     }
 
     public Task getTask(int index){
-
+        if(index < 0 || index > size())
+            throw new IndexOutOfBoundsException();
         return arrayTask[index];
     }
 

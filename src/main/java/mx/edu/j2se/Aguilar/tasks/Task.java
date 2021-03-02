@@ -15,6 +15,8 @@ public class Task {
     //Constructores
 
     public Task(String title, int time){
+        if ( time < 0)
+            throw new IllegalArgumentException();
         this.title = title;
         this.time = time;
         this.active = false; //inactive task
@@ -22,6 +24,8 @@ public class Task {
     }
 
     public Task(String title, int start, int end, int interval){
+        if (time < 0)
+            throw new IllegalArgumentException();
         this.title = title;
         this.start = start;
         this.end = end;
