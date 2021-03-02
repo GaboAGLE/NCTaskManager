@@ -11,9 +11,12 @@ public class ArrayTaskList {
     public boolean remove (Task task){
         for(int i = 0; i <= size(); ){
             if(arrayTask[i].equals(task)){
+                arrayTask[i] = null;
+                break;
 
             }
         }
+        return true;
 
     }
 
