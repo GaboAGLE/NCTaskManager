@@ -1,11 +1,17 @@
 package mx.edu.j2se.Aguilar.tasks;
 
+import java.util.Arrays;
+
 public class ArrayTaskList {
+    private int countOfTasks = 0;
+    Task []arrayTask = new Task[100]; // crear el arreglo
 
-    Task []arrayTask = new Task[0]; // crear el arreglo e iniciarlo en cero
-
-    void add (Task task){
-
+    void add (Task task) {
+        arrayTask[countOfTasks] = task;
+        countOfTasks++;
+        if (countOfTasks == arrayTask.length) {
+            arrayTask = Arrays.copyOf(arrayTask, arrayTask.length * 2);
+        }
     }
 
     public boolean remove (Task task){
