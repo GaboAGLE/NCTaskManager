@@ -113,6 +113,7 @@ public class Task {
         }
     }
     public boolean isRepetido(){
+
         return this.repetido;
     }
 
@@ -120,14 +121,17 @@ public class Task {
 
      int nextTimeAfter (int current){
        // int nextimeaf = this.time - current;
+         if (current >= this.end || current + this.interval >= this.end || !this.active) {
+             return -1;
+         }
 
-        if(current >= this.time) {
-            return -1;
+         for (int i = this.start; i <= current; i += this.interval) {
+             if (i < this.end - this.interval) {
+                 this.start += this.interval;
+             }
+         }
 
-        }
-        else {
-            return this.start;
-        }
+         return this.start;
 
 
         }
