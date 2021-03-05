@@ -9,9 +9,18 @@ public class Circle {
         this.radius = 1;
     }
     public Circle (int radius){
-        if ( radius < 0 || radius == 0)
-            throw new IllegalArgumentException();
-        this.radius = radius;
+
+        try{
+            if ( radius < 0 || radius == 0){
+                throw new IllegalArgumentException();}
+            else{
+                this.radius = radius;
+            }
+
+        }
+        catch(Exception e) {
+            System.out.println("Valores invalidos");
+        }
     }
 
     public void setRadius(int radius){
