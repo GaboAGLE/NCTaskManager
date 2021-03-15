@@ -2,13 +2,13 @@ package mx.edu.j2se.Aguilar.tasks;
 
 public class Task {
     //Atributos
-    String title;
-    int time;
-    int start;
-    int end;
-    int interval;
-    boolean active;
-    boolean repetido;
+   private String title;
+   private int time;
+   private int start;
+   private int end;
+   private int interval;
+   private boolean active;
+   private boolean repetido;
 
 
 
@@ -66,11 +66,17 @@ public class Task {
 
     }
     public void setTime(int time){  //?
-        if (this.repetido ==true){
-            this.repetido = false;
-        }
-        else {
+
+        if (!this.repetido){
             this.time = time;
+        }else
+            {
+            this.repetido = false;
+            this.time = time;
+            this.end = 0;
+            this.interval = 0;
+            this.start = 0;
+
         }
     }
 
@@ -120,18 +126,19 @@ public class Task {
     // TASK 2. CHECKING THE NEXT TASK EXECUTION
 
      int nextTimeAfter (int current){
-       // int nextimeaf = this.time - current;
-         if (current >= this.end || current + this.interval >= this.end || !this.active) {
-             return -1;
-         }
+        if (this.repetido == false)
+        {
+            return this.time;
+        }
+        else{
+            if(current >= this.start && interval == 0){
+                return -1;
+            }else{
+                return this.start;
+            }
+        }
 
-         for (int i = this.start; i <= current; i += this.interval) {
-             if (i < this.end - this.interval) {
-                 this.start += this.interval;
-             }
-         }
 
-         return this.start;
 
 
         }
