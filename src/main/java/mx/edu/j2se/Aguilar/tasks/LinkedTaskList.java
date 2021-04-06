@@ -1,6 +1,10 @@
 package mx.edu.j2se.Aguilar.tasks;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.stream.Stream;
 
-public class LinkedTaskList {
+
+public class LinkedTaskList extends AbstractTaskList implements Iterable<Task> {
 
     class Node{
         Node next;
@@ -15,7 +19,7 @@ public class LinkedTaskList {
     private Node last;
     private int countofTasks;
 
-    void add (Task task){
+    public void add(Task task){
         if(task == null){
             throw new NullPointerException();}
 
@@ -56,6 +60,7 @@ public class LinkedTaskList {
     }
 
     public int size(){
+
         return this.countofTasks;
     }
 
@@ -69,5 +74,62 @@ public class LinkedTaskList {
         }
         return returnTask.task;
 
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof LinkedTaskList) {
+            LinkedTaskList listOther = (LinkedTaskList) o;
+            if (this.size() == listOther.size()) {
+                Iterator list1 = this.iterator();
+                Iterator list2 = listOther.iterator();
+
+                while (list1.hasNext()) {
+                    Object e1 = list1.next();
+                    Object e2 = list2.next();
+
+                    if (!(e1 == null ? e2 == null : e1.equals(e2))) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hashCode = 1;
+        for (Task task : this) {
+            hashCode = 31 * hashCode + (task == null ? 0 : task.hashCode());
+        }
+        return hashCode;
+    }
+
+    public LinkedTaskList clone() throws CloneNotSupportedException {
+        LinkedTaskList link = (LinkedTaskList) super.clone();
+        link.countofTasks = 0;
+        for (int i = 0; i < countofTasks; i++) {
+            link.add(getTask(i));
+        }
+        return link;
+
+    }
+    @Override
+    public Stream<Task> getStream() {
+        ArrayTaskList list = new ArrayTaskList();
+        for (int i = 0; i < size(); i++) {
+            list.add(getTask(i));
+        }
+        return list.getStream();
+    }
+
+    @Override
+    public String toString() {
+        return "LinkedTaskList{" +
+                "start=" + first +
+                ", end=" + last +
+                ", countofTasks=" + countofTasks +
+                '}';
     }
 }

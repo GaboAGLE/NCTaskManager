@@ -1,6 +1,8 @@
 package mx.edu.j2se.Aguilar.tasks;
 
-public class Task {
+import java.util.Objects;
+
+public class Task implements Cloneable {
     //Atributos
    private String title;
    private int time;
@@ -143,5 +145,57 @@ public class Task {
 
         }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), isActive(), getTime(), getRepeatInterval(),
+                isRepetido(), getStartTime(), getEndTime());
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", time=" + time +
+                ", start=" + start +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", active=" + active +
+                ", repeat=" + repetido +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return time == task.time &&
+                start == task.start &&
+                end == task.end &&
+                interval == task.interval &&
+                active == task.active &&
+                repetido == task.repetido
+                && Objects.equals(title, task.title);
+
+    }
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", time=" + time +
+                ", start=" + start +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", active=" + active +
+                ", repeat=" + repetido +
+                '}';
+    }
+
+
+    @Override
+    public Task clone() throws CloneNotSupportedException {
+        //Returns an object Task
+        return (Task) super.clone();
+    }
 
 }
